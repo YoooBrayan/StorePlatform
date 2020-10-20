@@ -1,0 +1,45 @@
+<app-navigation></app-navigation>
+
+<div class="row mt-4">
+  <div class="col-4 offset-4 p-3 border mt-4">
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" required placeholder="Name" />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="Description"
+        />
+      </div>
+      <div class="form-group">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01"
+              >Type</label
+            >
+          </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            <option value="1">Soda</option>
+            <option value="2">Package</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="price" required />
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="quantity" required />
+      </div>
+      <button
+        type="submit"
+        class="btn btn-outline-primary btn-block"
+        (click)="register()"
+      >
+        Add
+      </button>
+    </form>
+  </div>
+</div>
