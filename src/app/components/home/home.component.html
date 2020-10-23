@@ -4,48 +4,65 @@
   <div class="row">
     <div class="col-6 mt-4">
       <form class="mt-2">
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control" required placeholder="Name" name="nombre" [value]="usuario.nombre"/>
+        <h3 class="text-center text-info">Personal Information</h3>
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Name:</label>
+          <input
+            type="text"
+            class="form-control col-9"
+            required
+            placeholder="Name"
+            name="nombre"
+            [(ngModel)]="usuario.nombre"
+            [value]="usuario.nombre"
+          />
         </div>
-        <div class="form-group">
+        <div class="form-group row">
+          <label class="col-form-label col-2">NIT:</label>
           <input
             type="number"
-            class="form-control"
+            class="form-control col-9"
             placeholder="Nit"
             required
+            name="nit"
+            [(ngModel)]="usuario.nit"
             [value]="usuario.nit"
           />
         </div>
-        <div class="form-group">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Type</label
-              >
-            </div>
-            <select class="custom-select" id="selectD">
-              <option value="1">CC</option>
-              <option value="2">Passport</option>
-            </select>
-          </div>
-          <input type="number" class="form-control" placeholder="ID Number" name="numero_documento" [value]="usuario.numero_documento" disabled/>
+        <div class="form-group row">
+          <label class="col-form-label col-2"> {{ usuario.tipo_documento == 1 ? "CC:" : "PP:" }} </label>
+          <input
+            type="number"
+            class="form-control col-9"
+            placeholder="ID Number"
+            name="numero_documento"
+            [value]="usuario.numero_documento"
+            disabled
+          />
         </div>
-        <div class="form-group">
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Email</label>
           <input
             type="email"
-            class="form-control"
+            class="form-control col-9"
             placeholder="email"
             required
+            name="email"
+            [(ngModel)]="usuario.email"
             [value]="usuario.email"
           />
         </div>
-        <button class="btn btn-outline-success" (click)="update()">Update</button>
+        <button hidden class="btn btn-outline-success" (click)="update()">
+          Update
+        </button>
+        <div *ngIf="updated" class="alert alert-success" role="alert">
+          data updated successfully
+        </div>
       </form>
     </div>
 
     <div class="col-6 mt-4">
-      <h2 class="text-center text-success">Store</h2>
+      <h2 class="text-center text-info">Store</h2>
       <form class="mt-2">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Name" required />
@@ -63,7 +80,7 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-success btn-block">
+        <button type="submit" class="btn btn-outline-info btn-block">
           Add
         </button>
       </form>
@@ -72,7 +89,7 @@
   <div class="row mt-3 border p-1">
     <div class="col-12">
       <div class="card-columns">
-        <div  class="card border-0">
+        <div class="card border-0">
           <img
             src="https://corbatas.online/public/uploads/11568913116-h-250-no-image-800x511.png"
             class="card-img-top"

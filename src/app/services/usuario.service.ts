@@ -17,4 +17,9 @@ export class UsuarioService {
   login(usuario:Usuario){
     return this.http.post(`${this.API}usuario/authenticate`, usuario);
   }
+
+  update(usuario:Usuario){
+    console.log(usuario)
+    return this.http.put(`${this.API}usuario`, usuario);
+  }
 }

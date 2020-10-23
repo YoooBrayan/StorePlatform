@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -8,23 +9,38 @@ import { Usuario } from '../../models/Usuario';
 })
 export class HomeComponent implements OnInit {
   usuario: Usuario = {
-    nombre: "",
+    nombre: '',
     nit: 0,
     tipo_documento: 0,
-    numero_documento: "",
-    email: ""
+    numero_documento: '',
+    email: '',
   };
 
-  constructor() {}
+  updated: boolean;
+
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-    let usuario = JSON.parse(window.localStorage.getItem("usuario"));
+    let usuario = JSON.parse(window.localStorage.getItem('usuario'));
     this.usuario = usuario;
-    console.log(this.usuario)
-  
   }
 
-  update(){
-    console.log(this.usuario)
+  update() {
+    this.updated = false;
+    this.usuarioService.update(this.usuario).subscribe(
+      (res:boolean) => {
+        this.updated = res;
+      console.log(this.usuario)
+      window.localStorage.removeItem("usuario");
+      window.localStorage.setItem("usuario", JSON.stringify(this.usuario))
+        setTimeout(() => {
+          this.updated = false;
+        }, 3000);
+      },
+      (error) => {
+        this.updated = false;
+        console.log('eror', error);
+      }
+    );
   }
 }
