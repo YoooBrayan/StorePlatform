@@ -12,9 +12,9 @@ export class UsuarioService {
   usuario:Usuario;
 
   constructor(private http: HttpClient) { }
+    
 
   login(usuario:Usuario){
-    console.log("Llego: " , usuario)
-    return this.http.post(`${this.API}usuario`, usuario);
+    return this.http.post(`${this.API}usuario/authenticate`, usuario);
   }
 }
