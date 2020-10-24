@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import { Store } from '../../models/Store';
+import { Product } from '../../models/product';
 import { UsuarioService } from '../../services/usuario.service';
 import { StoreService } from '../../services/store.service';
+import { ProductService } from '../../services/product.service'
 
 @Component({
   selector: 'app-home',
@@ -30,9 +32,12 @@ export class HomeComponent implements OnInit {
   updated: boolean;
   addStore: boolean;
 
+  products : Product[];
+
   constructor(
     private usuarioService: UsuarioService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private productService: ProductService
   ) {
     this.addStore = false;
   }
@@ -40,6 +45,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.usuario = JSON.parse(window.localStorage.getItem('usuario'));
     this.getStores();
+    this.getProducts();
+  }
+
+  getProducts(){
+    this.productService.getAll(this.storeSelected).subscribe((res:[]) => {
+      console.log("res",res);
+      this.products = res;
+    },
+    (error) => {
+      console.log("error",error)
+      this.products = [];
+    })
   }
 
   update() {
@@ -89,5 +106,10 @@ export class HomeComponent implements OnInit {
 
   add() {
     this.addStore = !this.addStore;
+  }
+
+  handleChange(){
+    if(this.storeSelected!==0)
+    this.getProducts();
   }
 }

@@ -83,7 +83,7 @@
               >
             </div>
             <select
-              (change)="cambiar()"
+              (change)="handleChange()"
               name="types"
               [(ngModel)]="store.tipo"
               class="custom-select"
@@ -125,7 +125,7 @@
       <h2 class="text-center text-info">Stores</h2>
       <div class="input-group mb-3 mt-2">
         <select
-          (change)="cambiar()"
+          (change)="handleChange()"
           name="types"
           [(ngModel)]="storeSelected"
           class="custom-select"
@@ -141,21 +141,21 @@
       </div>
       <button (click)="this.addStore = !this.addStore" class="btn btn-outline-success btn-block">Add</button>
     </div>
-    <div class="row mt-3 border p-1">
+    <div class="row mt-3 p-1">
       <div class="col-12">
         <div class="card-columns">
-          <div class="card border-0">
+          <div *ngFor="let product of products" class="card m-2">
             <img
-              src="https://corbatas.online/public/uploads/11568913116-h-250-no-image-800x511.png"
+              [src]="product.foto"
               class="card-img-top"
               alt="..."
             />
-            <div class="card-body">
-              <h3 class="card-title">Name</h3>
-              <h4>type</h4>
-              <h4>price</h4>
-              <h4>quantity</h4>
-              <p class="card-text">description</p>
+            <div class="card-body text-center">
+              <h3 class="card-title"> {{ product.nombre }} </h3>
+              <h4> {{ product.tipo }} </h4>
+              <h4> {{ product.valor }} </h4>
+              <h4> {{ product.cantidad }} </h4>
+              <p class="card-text"> {{ product.descripcion }} </p>
             </div>
           </div>
         </div>
