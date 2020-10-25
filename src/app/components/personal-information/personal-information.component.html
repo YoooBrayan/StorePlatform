@@ -1,0 +1,60 @@
+<div class="">
+    <form class="mt-2">
+      <h3 class="text-center text-info">Personal Information</h3>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Name:</label>
+        <input
+          type="text"
+          class="form-control col-9"
+          required
+          placeholder="Name"
+          name="nombre"
+          [(ngModel)]="usuario.nombre"
+          [value]="usuario.nombre"
+        />
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label col-2">NIT:</label>
+        <input
+          type="number"
+          class="form-control col-9"
+          placeholder="Nit"
+          required
+          name="nit"
+          [(ngModel)]="usuario.nit"
+          [value]="usuario.nit"
+        />
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label col-2">
+          {{ usuario.tipo_documento == 1 ? "CC:" : "PP:" }}
+        </label>
+        <input
+          type="number"
+          class="form-control col-9"
+          placeholder="ID Number"
+          name="numero_documento"
+          [value]="usuario.numero_documento"
+          disabled
+        />
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Email</label>
+        <input
+          type="email"
+          class="form-control col-9"
+          placeholder="email"
+          required
+          name="email"
+          [(ngModel)]="usuario.email"
+          [value]="usuario.email"
+        />
+      </div>
+      <button hidden class="btn btn-outline-success" (click)="update()">
+        Update
+      </button>
+      <div *ngIf="updated" class="alert alert-success" role="alert">
+        data updated successfully
+      </div>
+    </form>
+  </div>

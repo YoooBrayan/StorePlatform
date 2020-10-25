@@ -19,7 +19,7 @@ export class UsuarioService {
   }
 
   update(usuario:Usuario){
-    console.log(usuario)
+    console.log("updated")
     return this.http.put(`${this.API}usuario`, usuario);
   }
 }

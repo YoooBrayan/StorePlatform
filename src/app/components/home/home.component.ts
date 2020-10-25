@@ -12,6 +12,7 @@ import { ProductService } from '../../services/product.service'
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+
   usuario: Usuario = {
     nombre: '',
     nit: 0,
@@ -20,22 +21,19 @@ export class HomeComponent implements OnInit {
     email: '',
   };
 
-  store: Store = {
+  /*store: Store = {
     id: 0,
     nombre: '',
     foto: '',
     id_encargado: 0,
     tipo: 0,
-  };
+  };*/
 
-  storeSelected: number = 0;
-  updated: boolean;
   addStore: boolean;
 
   products : Product[];
 
   constructor(
-    private usuarioService: UsuarioService,
     private storeService: StoreService,
     private productService: ProductService
   ) {
@@ -48,8 +46,9 @@ export class HomeComponent implements OnInit {
     this.getProducts();
   }
 
-  getProducts(){
-    this.productService.getAll(this.storeSelected).subscribe((res:[]) => {
+  getProducts(storeSelected=0){
+    if(storeSelected!==0)
+    this.productService.getAll(storeSelected).subscribe((res:[]) => {
       console.log("res",res);
       this.products = res;
     },
@@ -59,33 +58,15 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  update() {
-    this.updated = false;
-    this.usuarioService.update(this.usuario).subscribe(
-      (res: boolean) => {
-        this.updated = res;
-        window.localStorage.removeItem('usuario');
-        window.localStorage.setItem('usuario', JSON.stringify(this.usuario));
-        setTimeout(() => {
-          this.updated = false;
-        }, 3000);
-      },
-      (error) => {
-        this.updated = false;
-        console.log('eror', error);
-      }
-    );
-  }
-
   stores: Store[] = [];
 
-  save() {
+  save(store:Store) {
     this.addStore = !this.addStore !== false ? this.addStore : !this.addStore;
-    this.store.id_encargado = this.usuario.id;
-    this.storeService.save(this.store).subscribe(
+    store.id_encargado = this.usuario.id;
+    this.storeService.save(store).subscribe(
       (res) => {
-        this.stores.push(this.store);
-        this.store = {
+        this.stores.push(store);
+        store = {
           nombre: '',
           tipo: 0,
           foto: '',
@@ -104,12 +85,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  add() {
-    this.addStore = !this.addStore;
-  }
-
-  handleChange(){
-    if(this.storeSelected!==0)
-    this.getProducts();
+  handleChange(storeSelected:number){
+    console.log(storeSelected)
+    if(storeSelected!==0)
+    this.getProducts(storeSelected);
   }
 }

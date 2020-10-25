@@ -1,0 +1,15 @@
+<h2 class="text-center text-info">Stores</h2>
+<div class="input-group mb-3 mt-2">
+  <select
+    (change)="handleChange()"
+    name="types"
+    [(ngModel)]="storeSelected"
+    class="custom-select"
+    id="inputGroupSelect01"
+  >
+    <option value="0">Select</option>
+    <option *ngFor="let store of stores" [value]="store.id">
+      {{ store.nombre }}
+    </option>
+  </select>
+</div>

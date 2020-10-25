@@ -9,7 +9,11 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ListProductsComponent } from './components/list-products/list-products.component';
+import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
+import { AddStoreComponent } from './components/add-store/add-store.component';
+import { SelectStoreComponent } from './components/select-store/select-store.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { HttpClientModule } from '@angular/common/http'
     LoginComponent,
     HomeComponent,
     ProductsComponent,
-    NavigationComponent
+    NavigationComponent,
+    ListProductsComponent,
+    PersonalInformationComponent,
+    AddStoreComponent,
+    SelectStoreComponent
   ],
   imports: [
     BrowserModule,
