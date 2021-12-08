@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   addStore: boolean;
 
-  products : Product[];
+  products: Product[];
 
   constructor(
     private storeService: StoreService,
@@ -42,25 +42,59 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = JSON.parse(window.localStorage.getItem('usuario'));
-    this.getStores();
+    this.usuario = {
+      nombre: '',
+      nit: 0,
+      tipo_documento: 0,
+      numero_documento: '',
+      email: '',
+    }
+    //this.getStores();
     this.getProducts();
   }
 
-  getProducts(storeSelected=0){
-    if(storeSelected!==0)
-    this.productService.getAll(storeSelected).subscribe((res:[]) => {
-      console.log("res",res);
-      this.products = res;
-    },
-    (error) => {
-      console.log("error",error)
-      this.products = [];
-    })
+  getProducts(storeSelected = 0) {
+    if (storeSelected !== 0) {
+      this.productService.getAll(storeSelected).subscribe((res: []) => {
+        console.log("res", res);
+        this.products = res;
+      },
+        (error) => {
+          console.log("error", error)
+          this.products = [];
+        })
+    } else {
+      this.products = [{
+        nombre: 'Monitor',
+        descripcion: 'LG 4K',
+        cantidad: 23,
+        tipo: 2,
+        valor: 1000000,
+        foto: 'https://images.philips.com/is/image/PhilipsConsumer/276E8VJSB_27-IMS-es_MX?$jpglarge$&wid=1250'
+      },
+      {
+        nombre: 'Monitor',
+        descripcion: 'LG 4K',
+        cantidad: 23,
+        tipo: 2,
+        valor: 1000000,
+        foto: 'https://images.philips.com/is/image/PhilipsConsumer/276E8VJSB_27-IMS-es_MX?$jpglarge$&wid=1250'
+      },
+      {
+        nombre: 'Monitor',
+        descripcion: 'LG 4K',
+        cantidad: 23,
+        tipo: 2,
+        valor: 1000000,
+        foto: 'https://images.philips.com/is/image/PhilipsConsumer/276E8VJSB_27-IMS-es_MX?$jpglarge$&wid=1250'
+      }]
+    }
+
   }
 
   stores: Store[] = [];
 
-  save(store:Store) {
+  save(store: Store) {
     this.addStore = !this.addStore !== false ? this.addStore : !this.addStore;
     store.id_encargado = this.usuario.id;
     this.storeService.save(store).subscribe(
@@ -85,9 +119,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  handleChange(storeSelected:number){
+  handleChange(storeSelected: number) {
     console.log(storeSelected)
-    if(storeSelected!==0)
-    this.getProducts(storeSelected);
+    if (storeSelected !== 0)
+      this.getProducts(storeSelected);
   }
 }

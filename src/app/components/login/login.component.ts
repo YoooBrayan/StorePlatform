@@ -10,7 +10,7 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private usuarioService: UsuarioService) {}
+  constructor(private router: Router, private usuarioService: UsuarioService) { }
 
   email: string;
   password: string;
@@ -23,11 +23,16 @@ export class LoginComponent implements OnInit {
   islogin: boolean = true;
   error: boolean = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   login() {
     this.islogin = false;
-    this.usuarioService.login(this.usuario).subscribe(
+    setTimeout(() => {
+      this.error = false;
+      this.islogin = true;
+      this.router.navigate(['home']);
+    }, 2000);
+    /* this.usuarioService.login(this.usuario).subscribe(
       (res: ParsedUrlQuery) => {
         window.localStorage.setItem('usuario', JSON.stringify(res));
         this.error = false;
@@ -39,6 +44,6 @@ export class LoginComponent implements OnInit {
         this.islogin = true;
         this.error = true;
       }
-    );
+    ); */
   }
 }
