@@ -28,6 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-## COMPILAR PARA PRODUCCIÓN
-
+## Compilar para producción
 ng build --output-hashing=all --prod --base-href /StorePlatform/
